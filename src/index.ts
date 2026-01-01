@@ -46,12 +46,13 @@ export function pluginVue2(options: PluginVueOptions = {}): RsbuildPlugin {
       const CSS_MODULES_REGEX = /\.modules?\.\w+$/i;
 
       api.modifyEnvironmentConfig((config, { mergeEnvironmentConfig }) => {
-        // Support `<style module>` in Vue SFC
+        // Support `<style module>`, `<style module="customName">` in Vue SFC
         if (config.output.cssModules.auto === true) {
           config.output.cssModules.auto = (path, query) => {
             if (VUE_REGEXP.test(path)) {
+              const params = new URLSearchParams(query || '');
               return (
-                query.includes('type=style') && query.includes('module=true')
+                params.get('type') === 'style' && params.has('module')
               );
             }
             return CSS_MODULES_REGEX.test(path);
