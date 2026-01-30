@@ -1,10 +1,33 @@
-import type { RsbuildPluginAPI, Rspack, SplitChunks } from '@rsbuild/core';
+import type {
+  NormalizedEnvironmentConfig,
+  RsbuildPluginAPI,
+  Rspack,
+  SplitChunks,
+} from '@rsbuild/core';
 import type { SplitVueChunkOptions } from './index.js';
 
 const isPlainObject = (obj: unknown): obj is Record<string, unknown> =>
   obj !== null &&
   typeof obj === 'object' &&
   Object.prototype.toString.call(obj) === '[object Object]';
+
+const isDefaultPreset = (config: NormalizedEnvironmentConfig) => {
+  const { performance, splitChunks } = config;
+
+  // Compatible with legacy `performance.chunkSplit` option
+  if (
+    performance.chunkSplit &&
+    typeof splitChunks === 'object' &&
+    Object.keys(splitChunks).length === 0
+  ) {
+    return performance.chunkSplit?.strategy === 'split-by-experience';
+  }
+
+  if (typeof splitChunks === 'object') {
+    return !splitChunks.preset || splitChunks.preset === 'default';
+  }
+  return false;
+};
 
 export const applySplitChunksRule = (
   api: RsbuildPluginAPI,
@@ -15,7 +38,7 @@ export const applySplitChunksRule = (
 ): void => {
   api.modifyBundlerChain((chain, { environment }) => {
     const { config } = environment;
-    if (config.performance.chunkSplit.strategy !== 'split-by-experience') {
+    if (!isDefaultPreset(config) || config.output.target !== 'web') {
       return;
     }
 
