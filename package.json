@@ -44,7 +44,7 @@
     "@rsbuild/core": "2.0.0-beta.0",
     "@rsbuild/plugin-less": "^1.6.0",
     "@rslib/core": "^0.18.2",
-    "@types/node": "^22.19.1",
+    "@types/node": "^24.10.9",
     "nano-staged": "^0.9.0",
     "playwright": "^1.57.0",
     "simple-git-hooks": "^2.13.1",
