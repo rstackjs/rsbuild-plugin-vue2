@@ -36,17 +36,17 @@
   },
   "dependencies": {
     "vue-loader": "^15.11.1",
-    "webpack": "^5.103.0"
+    "webpack": "^5.104.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@playwright/test": "^1.57.0",
+    "@playwright/test": "^1.58.1",
     "@rsbuild/core": "2.0.0-beta.0",
     "@rsbuild/plugin-less": "^1.6.0",
-    "@rslib/core": "^0.18.2",
+    "@rslib/core": "^0.19.4",
     "@types/node": "^24.10.9",
     "nano-staged": "^0.9.0",
-    "playwright": "^1.57.0",
+    "playwright": "^1.58.1",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^5.9.3",
     "vue": "^2.7.16"
@@ -59,7 +59,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.28.2",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
