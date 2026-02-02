@@ -1,6 +1,6 @@
 {
   "name": "@rsbuild/plugin-vue2",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "repository": "https://github.com/rstackjs/rsbuild-plugin-vue2",
   "license": "MIT",
   "type": "module",
