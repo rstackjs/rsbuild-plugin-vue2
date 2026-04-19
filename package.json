@@ -36,19 +36,19 @@
   },
   "dependencies": {
     "vue-loader": "^15.11.1",
-    "webpack": "^5.106.1"
+    "webpack": "^5.106.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@playwright/test": "^1.59.1",
-    "@rsbuild/core": "2.0.0-rc.2",
+    "@rsbuild/core": "2.0.0-rc.4",
     "@rsbuild/plugin-less": "^1.6.2",
-    "@rslib/core": "^0.21.0",
+    "@rslib/core": "^0.21.2",
     "@types/node": "^24.12.2",
     "nano-staged": "^1.0.2",
     "playwright": "^1.59.1",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "vue": "^2.7.16"
   },
   "peerDependencies": {
