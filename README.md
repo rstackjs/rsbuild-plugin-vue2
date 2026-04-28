@@ -23,7 +23,7 @@ Add plugin to your `rsbuild.config.ts`:
 
 ```ts
 // rsbuild.config.ts
-import { pluginVue2 } from "@rsbuild/plugin-vue2";
+import { pluginVue2 } from '@rsbuild/plugin-vue2';
 
 export default {
   plugins: [pluginVue2()],
@@ -46,7 +46,7 @@ Options passed to `vue-loader`, please refer to the [vue-loader documentation](h
 ```js
 const defaultOptions = {
   compilerOptions: {
-    whitespace: "condense",
+    whitespace: 'condense',
   },
   experimentalInlineMatchResource: true,
 };
