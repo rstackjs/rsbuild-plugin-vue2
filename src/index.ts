@@ -51,9 +51,7 @@ export function pluginVue2(options: PluginVueOptions = {}): RsbuildPlugin {
           config.output.cssModules.auto = (path, query) => {
             if (VUE_REGEXP.test(path)) {
               const params = new URLSearchParams(query || '');
-              return (
-                params.get('type') === 'style' && params.has('module')
-              );
+              return params.get('type') === 'style' && params.has('module');
             }
             return CSS_MODULES_REGEX.test(path);
           };

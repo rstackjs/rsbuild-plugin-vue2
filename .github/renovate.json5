@@ -1,5 +1,5 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>rstackjs/renovate"],
-  "ignoreDeps": ["vue", "vue-loader"]
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['github>rstackjs/renovate'],
+  ignoreDeps: ['vue', 'vue-loader'],
 }
