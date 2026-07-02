@@ -1,6 +1,6 @@
 {
   "name": "@rsbuild/plugin-vue2",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "repository": "https://github.com/rstackjs/rsbuild-plugin-vue2",
   "homepage": "https://github.com/rstackjs/rsbuild-plugin-vue2#readme",
   "bugs": {
