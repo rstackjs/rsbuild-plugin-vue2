@@ -3,3 +3,5 @@ allowBuilds:
   simple-git-hooks: false
 minimumReleaseAgeExclude:
   - '@rsbuild/core@2.1.3'
+  - typescript
+  - '@typescript/*'
