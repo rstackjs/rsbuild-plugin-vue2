@@ -6,6 +6,6 @@ import { getRandomPort } from '../helper';
 export default defineConfig({
   plugins: [pluginVue2(), pluginLess()],
   server: {
-    port: getRandomPort(),
+    port: await getRandomPort(),
   },
 });
