@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@rsbuild/core": "2.1.5",
-    "@rsbuild/plugin-less": "^1.6.4",
+    "@rsbuild/plugin-less": "^2.0.1",
     "@rslib/core": "^0.23.2",
     "@rslint/core": "^0.6.5",
     "@rstackjs/test-utils": "^0.2.0",
