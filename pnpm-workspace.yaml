@@ -2,8 +2,15 @@ allowBuilds:
   core-js: false
   simple-git-hooks: false
 minimumReleaseAgeExclude:
+  - '@rsbuild/*'
   - '@rsbuild/core@2.1.3'
-  - typescript
-  - '@typescript/*'
-  - '@rstest/*'
+  - '@rslib/*'
+  - '@rslint/*'
+  - '@rspack/*'
+  - '@rspress/*'
   - '@rstackjs/*'
+  - '@rstest/*'
+  - '@typescript/*'
+  - 'rsbuild-plugin-*'
+  - rstack
+  - typescript
