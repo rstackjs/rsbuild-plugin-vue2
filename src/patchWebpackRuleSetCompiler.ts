@@ -8,10 +8,21 @@ type RuleSetPlugin = {
   ruleProperty?: string;
 };
 
+type RuleSetCondition = {
+  property: string;
+  fn: (value: string) => boolean;
+};
+
 type RuleSetCompilerConstructor = {
-  new (plugins?: RuleSetPlugin[]): object;
+  new (plugins?: RuleSetPlugin[]): {
+    compileRule(...args: unknown[]): { conditions: RuleSetCondition[] };
+  };
   [PATCHED_RULE_SET_COMPILER]?: true;
 };
+
+type BasicMatcherRulePluginConstructor = new (
+  ruleProperty: string,
+) => RuleSetPlugin;
 
 type ObjectMatcherRulePluginConstructor = new (
   ruleProperty: string,
@@ -30,6 +41,8 @@ export function patchWebpackRuleSetCompiler() {
     require.resolve('webpack/lib/rules/RuleSetCompiler');
   const ObjectMatcherRulePlugin =
     require('webpack/lib/rules/ObjectMatcherRulePlugin') as ObjectMatcherRulePluginConstructor;
+  const BasicMatcherRulePlugin =
+    require('webpack/lib/rules/BasicMatcherRulePlugin') as BasicMatcherRulePluginConstructor;
   const RuleSetCompiler = require(
     ruleSetCompilerPath,
   ) as RuleSetCompilerConstructor;
@@ -46,11 +59,12 @@ export function patchWebpackRuleSetCompiler() {
         (plugin) => plugin?.ruleProperty === 'with',
       );
 
-      super(
-        hasWithRule
-          ? plugins
+      super([
+        ...plugins,
+        new BasicMatcherRulePlugin('phase'),
+        ...(hasWithRule
+          ? []
           : [
-              ...plugins,
               // Rspack stores import attributes in `attributes`, matching
               // webpack's own NormalModuleFactory rule compiler behavior.
               new ObjectMatcherRulePlugin('with', 'attributes', (value) =>
@@ -59,8 +73,22 @@ export function patchWebpackRuleSetCompiler() {
                   !(value as { _isLegacyAssert?: unknown })._isLegacyAssert,
                 ),
               ),
-            ],
-      );
+            ]),
+      ]);
+    }
+
+    compileRule(...args: unknown[]) {
+      const rule = super.compileRule(...args);
+      // vue-loader@15 evaluates conditions of cloned rules against a fake
+      // resource path. Language blocks are always imported through a regular
+      // import, so match `phase` against `evaluation`, like rspack-vue-loader.
+      for (const condition of rule.conditions) {
+        if (condition.property === 'phase') {
+          const { fn } = condition;
+          condition.fn = () => fn('evaluation');
+        }
+      }
+      return rule;
     }
   }
 
